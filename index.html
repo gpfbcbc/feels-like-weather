@@ -166,7 +166,7 @@
     setTheme();
 
     function fmtTemp(v){ return `${Math.round(v)}°`; }
-    function fmtTime(iso){ return new Date(iso).toLocaleTimeString([], { hour: '2-digit', minute:'2-digit' }); }
+    function fmtTime(iso){ return new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(new Date(iso)); }
     function fmtDate(iso){ return new Date(iso).toLocaleDateString([], { month:'short', day:'numeric' }); }
     function fmtDay(iso,i){ if(i===0) return 'Today'; return new Date(iso).toLocaleDateString([], { weekday:'long' }); }
 
@@ -207,7 +207,7 @@
         feel: data.hourly.apparent_temperature[i],
         air: data.hourly.temperature_2m[i]
       })).filter(h => h.time.slice(0,10) === today);
-      const visibleHours = todayHours.slice(Math.max(0, nowHour), Math.max(0, nowHour) + 12);
+      const visibleHours = todayHours.slice(Math.max(0, nowHour), Math.max(0, nowHour) + 6);
       const days = data.daily.time.map((time, i) => ({
         time,
         airMin: data.daily.temperature_2m_min[i],
@@ -240,7 +240,7 @@
         </section>
 
         <section class="stack">
-          <div class="section-title"><h2>Today by hour</h2><span>Next 12 hours</span></div>
+          <div class="section-title"><h2>Today by hour</h2><span>Next 6 hours</span></div>
           <div class="hourly-strip">
             ${visibleHours.map(h => `
               <article class="hour-card">
