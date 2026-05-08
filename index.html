@@ -240,19 +240,6 @@
         </section>
 
         <section class="stack">
-          <div class="section-title"><h2>Today by hour</h2><span>Next 6 hours</span></div>
-          <div class="hourly-strip">
-            ${visibleHours.map(h => `
-              <article class="hour-card">
-                <time datetime="${h.time}">${fmtTime(h.time)}</time>
-                <div class="hour-main">${fmtTemp(h.feel)}</div>
-                <div class="hour-sub">Air ${fmtTemp(h.air)}</div>
-              </article>
-            `).join('')}
-          </div>
-        </section>
-
-        <section class="stack">
           <div class="section-title"><h2>Next 7 days</h2><span>Feels like first</span></div>
           <div class="days">
             ${days.map((d,i) => `
